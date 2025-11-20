@@ -137,6 +137,25 @@
             transform: scale(1.1);
         }
 
+        .white-piece {
+            color: white;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000,
+                -2px 0 0 #000,
+                2px 0 0 #000,
+                0 -2px 0 #000,
+                0 2px 0 #000;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+        }
+
+        .black-piece {
+            color: #1a1a1a;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+        }
+
         .controls {
             display: flex;
             gap: 10px;
@@ -253,9 +272,9 @@
     </div>
 
     <script>
-        // Piece Unicode characters
+        // Piece Unicode characters (using filled pieces for both colors)
         const PIECES = {
-            'K': '♔', 'Q': '♕', 'R': '♖', 'N': '♘', 'P': '♙',
+            'K': '♚', 'Q': '♛', 'R': '♜', 'N': '♞', 'P': '♟',
             'k': '♚', 'q': '♛', 'r': '♜', 'n': '♞', 'p': '♟'
         };
 
@@ -291,7 +310,8 @@
                     const piece = board[row][col];
                     if (piece !== '.') {
                         const pieceElement = document.createElement('span');
-                        pieceElement.className = 'piece';
+                        const isWhite = piece === piece.toUpperCase();
+                        pieceElement.className = `piece ${isWhite ? 'white-piece' : 'black-piece'}`;
                         pieceElement.textContent = PIECES[piece];
                         square.appendChild(pieceElement);
                     }
